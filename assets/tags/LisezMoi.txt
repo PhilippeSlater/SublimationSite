@@ -1,0 +1,29 @@
+Ce dossier contient les images de "tag" utilisées par la personnalisation
+(le client ajoute son nom, qui s'affiche par-dessus l'un de ces tags — ou
+sans tag du tout, avec l'option "Aucun tag").
+
+Le tag et le logo (voir assets/logos/) sont deux éléments graphiques
+distincts : le client peut activer l'un, l'autre, les deux ou aucun des
+deux, chacun avec sa propre position et sa propre taille.
+
+Pour ajouter un tag :
+1. Dépose ton image ici (fond transparent recommandé). Le nom affiché sur
+   le site sera le nom du fichier (sans l'extension).
+2. Double-clique sur scripts/build.bat.
+
+C'est tout — pas besoin de toucher à js/customization-data.js, ce fichier
+est régénéré automatiquement à partir de ce dossier.
+
+Couleur de texte par défaut : #14336b pour tous les tags. Pour changer la
+couleur par défaut d'UN tag en particulier, ajoute un fichier texte du même
+nom à côté de l'image (ex : MonTag.txt pour MonTag.png) contenant une
+couleur hex (ex : #1a2b3c) — le client pourra toujours la changer lui-même
+avec le sélecteur de couleur sur le site, ça ne fixe que la valeur de
+départ.
+
+La position du tag, la position du texte et la taille du texte sont réglées
+par le client directement sur le site (curseurs), pas ici — donc pas besoin
+de configurer où le texte doit tomber sur l'image.
+
+Pour ajouter une police, voir les instructions en haut de
+js/customization-data.js.

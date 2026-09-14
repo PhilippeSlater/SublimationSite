@@ -1,0 +1,21 @@
+Pour ajouter un tumbler, crée un dossier ici, un par produit :
+
+  templates/tumbler/NomDuModele_Prix/photos/
+
+Exemple : templates/tumbler/Vagues-Bleues_24.99/photos/
+
+Mets dedans tes photos du produit fini (un ou plusieurs angles), telles
+quelles — aucun traitement n'est fait, elles sont affichées exactement comme
+tu les déposes. Ne renomme pas les fichiers qui sortent de ton téléphone
+(IMG_0001.jpg, IMG_0002.jpg, ...) — l'ordre de prise de vue suffit, le site
+les affichera dans cet ordre.
+
+Optionnel : ajoute aussi templates/tumbler/NomDuModele_Prix/wrap.png pour
+montrer le design plat seul en première photo de la galerie.
+
+Puis double-clique sur scripts/build.bat pour mettre à jour le site.
+
+Formats acceptés : .jpg, .jpeg, .png, .webp
+
+Sans prix dans le nom du dossier (NomDuModele seulement), le site affiche
+"Prix sur demande".

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sublimation Boutique</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Barlow+Condensed:wght@600;700;800&family=Bebas+Neue&family=Black+Ops+One&family=Montserrat:wght@600;700;800&family=Oswald:wght@600;700&family=Roboto+Condensed:wght@600;700&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet"></head>
+<body>
+
+<header class="site-header">
+  <h1>✨ Sublimation Boutique</h1>
+  <p>Tumblers, tasses et étuis de téléphone personnalisés</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-category="tumbler">Tumbler</button>
+  <button class="tab-btn" data-category="tasse">Tasse</button>
+  <button class="tab-btn" data-category="etui">Étui téléphone</button>
+</nav>
+
+<main>
+  <section id="section-tumbler" class="product-section active"></section>
+  <section id="section-tasse" class="product-section"></section>
+  <section id="section-etui" class="product-section"></section>
+</main>
+
+<div id="viewer-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="modal-close" class="modal-close">&times;</button>
+    <h2 id="modal-title"></h2>
+
+    <div id="custom-upload" class="custom-upload" hidden>
+      <div id="custom-backgrounds-block" hidden>
+        <p class="custom-upload-intro">Choisis un design de départ :</p>
+        <div id="custom-backgrounds" class="bg-choices"></div>
+        <p class="custom-upload-or">— ou —</p>
+      </div>
+      <label for="custom-file-input" class="custom-upload-label">📤 Téléverse ta propre image</label>
+      <input type="file" id="custom-file-input" accept="image/*">
+      <p class="custom-upload-hint">Ton image reste sur ton appareil, elle n'est envoyée nulle part. Choisis un visuel plat, comme celui que tu ferais imprimer.</p>
+    </div>
+
+    <div id="viewer-stage">
+      <button id="gallery-prev" class="gallery-arrow gallery-prev" aria-label="Photo précédente">&#8249;</button>
+      <img id="viewer-frame" alt="">
+      <button id="gallery-next" class="gallery-arrow gallery-next" aria-label="Photo suivante">&#8250;</button>
+    </div>
+    <div id="gallery-dots" class="gallery-dots"></div>
+    <p class="modal-hint">Clique sur la photo pour zoomer</p>
+    <a id="gallery-download" class="gallery-download" download>Enregistrer cette photo</a>
+    <button type="button" id="gallery-add-cart" class="btn-download btn-add-cart">Ajouter cet article à ma commande</button>
+
+    <div id="phone-model-block" class="phone-model-block" hidden>
+      <label for="phone-model-input" class="customize-label">Modèle de téléphone / Phone model</label>
+      <input type="text" id="phone-model-input" maxlength="60" placeholder="Ex : iPhone 14 Pro, Samsung Galaxy S23...">
+      <p class="custom-upload-hint">Nos étuis ne sont pas MagSafe par défaut. Indique ton modèle ci-dessus : on te confirmera par courriel si une version MagSafe est possible (25 $ au lieu de 20 $). / Our cases are not MagSafe by default — enter your phone model above and we'll confirm by email whether a MagSafe version is possible ($25 instead of $20).</p>
+      <label class="customize-toggle-row">
+        <input type="checkbox" id="magsafe-request-toggle">
+        Je voudrais l'option MagSafe si possible (+5 $, à confirmer) / I'd like the MagSafe option if possible (+$5, to be confirmed)
+      </label>
+    </div>
+
+    <div id="customize-panel" class="customize-panel" hidden>
+      <label class="customize-toggle-row">
+        <input type="checkbox" id="customize-toggle">
+        Ajouter un nom personnalisé <span id="customize-surcharge-note"></span>
+      </label>
+
+      <div id="customize-fields" hidden>
+        <div class="customize-layout">
+          <div class="customize-preview">
+            <canvas id="customize-canvas" class="customize-canvas"></canvas>
+            <p id="customize-price-display" class="customize-price"></p>
+            <button type="button" id="customize-download" class="btn-download">Enregistrer cette image</button>
+            <button type="button" id="customize-add-cart" class="btn-download btn-add-cart">Ajouter à ma commande</button>
+            <p id="customize-add-cart-hint" class="cart-hint-inline" hidden>⚠️ Enregistre d'abord l'image ci-dessus, sinon ta commande ne correspondra pas à ce que tu vois.</p>
+          </div>
+
+          <div class="customize-controls">
+            <p class="customize-label">Texte</p>
+            <input type="text" id="customize-text" maxlength="20" placeholder="Nom à afficher">
+
+            <div id="customize-fonts" class="font-choices"></div>
+
+            <div class="customize-row">
+              <label for="customize-color">Couleur du texte</label>
+              <input type="color" id="customize-color">
+            </div>
+
+            <div class="customize-row">
+              <label for="customize-text-y">Position verticale du texte</label>
+              <input type="range" id="customize-text-y" min="0" max="100" value="50">
+            </div>
+
+            <div class="customize-row">
+              <label for="customize-font-size">Taille du texte</label>
+              <input type="range" id="customize-font-size" min="40" max="200" value="100">
+            </div>
+
+            <p class="customize-label">Tag</p>
+            <div id="customize-tags" class="tag-choices"></div>
+
+            <div class="customize-row">
+              <label for="customize-tag-y">Position verticale du tag</label>
+              <input type="range" id="customize-tag-y" min="0" max="100" value="50">
+            </div>
+
+            <div class="customize-row">
+              <label for="customize-tag-w">Largeur du tag</label>
+              <input type="range" id="customize-tag-w" min="10" max="200" value="50">
+            </div>
+
+            <div class="customize-row">
+              <label for="customize-tag-h">Hauteur du tag</label>
+              <input type="range" id="customize-tag-h" min="10" max="200" value="50">
+            </div>
+
+            <label class="customize-toggle-row customize-lock-row">
+              <input type="checkbox" id="customize-tag-lock" checked>
+              Conserver les proportions du tag
+            </label>
+
+            <p class="customize-label">Logo</p>
+            <div id="customize-logos" class="logo-choices"></div>
+
+            <div class="customize-row">
+              <label for="customize-logo-y">Position verticale du logo</label>
+              <input type="range" id="customize-logo-y" min="0" max="100" value="50">
+            </div>
+
+            <div class="customize-row">
+              <label for="customize-logo-w">Largeur du logo</label>
+              <input type="range" id="customize-logo-w" min="10" max="200" value="50">
+            </div>
+
+            <div class="customize-row">
+              <label for="customize-logo-h">Hauteur du logo</label>
+              <input type="range" id="customize-logo-h" min="10" max="200" value="50">
+            </div>
+
+            <label class="customize-toggle-row customize-lock-row">
+              <input type="checkbox" id="customize-logo-lock" checked>
+              Conserver les proportions du logo
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="cart-toggle" class="cart-toggle" aria-label="Voir ma commande">
+  🛒 <span id="cart-count">0</span>
+</button>
+
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-panel-header">
+    <h3>Ma commande</h3>
+    <button id="cart-close" class="modal-close">&times;</button>
+  </div>
+  <ul id="cart-list" class="cart-list"></ul>
+  <div class="cart-actions">
+    <button type="button" id="cart-clear" class="btn-secondary">Vider</button>
+    <button type="button" id="cart-send" class="btn-download">Envoyer ma commande par courriel</button>
+  </div>
+  <p class="cart-hint">⚠️ Pense à joindre les images que tu as enregistrées pour chaque item avant d'envoyer le courriel — le site ne peut pas les joindre automatiquement.</p>
+</div>
+
+<div id="save-toast" class="save-toast"></div>
+
+<script src="js/products-data.js"></script>
+<script src="js/customization-data.js"></script>
+<script src="js/custom-products.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/customize.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

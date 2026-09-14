@@ -1,0 +1,19 @@
+Ce dossier contient les images de "logo" utilisées par la personnalisation
+(le client peut poser un logo sur le design, en plus ou à la place du tag —
+ou sans logo du tout, avec l'option "Aucun logo").
+
+Le logo et le tag (voir assets/tags/) sont deux éléments graphiques
+distincts : le client peut activer l'un, l'autre, les deux ou aucun des
+deux, chacun avec sa propre position et sa propre taille.
+
+Pour ajouter un logo :
+1. Dépose ton image ici (fond transparent recommandé). Le nom affiché sur
+   le site sera le nom du fichier (sans l'extension).
+2. Double-clique sur scripts/build.bat.
+
+C'est tout — pas besoin de toucher à js/customization-data.js, ce fichier
+est régénéré automatiquement à partir de ce dossier.
+
+La position et la taille du logo sont réglées par le client directement sur
+le site (curseurs), pas ici — donc pas besoin de configurer où il doit
+tomber sur l'image.

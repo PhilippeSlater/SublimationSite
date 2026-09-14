@@ -1,0 +1,22 @@
+Ce dossier contient les designs de base proposés dans la section
+"Créez votre..." de chaque catégorie — le client peut choisir un de ces
+designs comme point de départ, au lieu de téléverser sa propre image.
+
+Un sous-dossier par catégorie :
+
+  assets/backgrounds/tumbler/
+  assets/backgrounds/tasse/
+  assets/backgrounds/etui/
+
+Pour ajouter un background :
+1. Dépose ton image dans le sous-dossier de la bonne catégorie (le design
+   plat seul, sans texte ni logo — le client ajoutera ça lui-même). Le nom
+   affiché sur le site sera le nom du fichier (sans l'extension).
+2. Double-clique sur scripts/build.bat.
+
+C'est tout — pas besoin de toucher à js/customization-data.js, ce fichier
+est régénéré automatiquement à partir de ces dossiers.
+
+Une catégorie sans aucun background n'affiche que l'option "Téléverse ta
+propre image" — donc rien à faire si tu ne veux pas encore proposer de
+backgrounds prêts pour cette catégorie.
