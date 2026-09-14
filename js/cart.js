@@ -14,7 +14,7 @@ const Cart = (function () {
   const STORAGE_KEY = "sublimation-cart";
 
   // TODO: remplace par ta vraie adresse courriel avant de mettre le site en ligne.
-  const ORDER_EMAIL = "philippe.slater@gmail.com";
+  const ORDER_EMAIL = "sublimation.pslater@gmail.com";
 
   let toggleBtn, panelEl, closeBtn, listEl, countEl, sendBtn, clearBtn;
 
