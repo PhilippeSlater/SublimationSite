@@ -1,4 +1,4 @@
-# Sublimation Boutique
+# Sublimation Babyfoot Québec
 
 Site web statique pour présenter tes produits de sublimation : **Tumbler**,
 **Tasse**, **Étui téléphone**. Chaque produit a un bouton "Voir les photos"

@@ -117,7 +117,7 @@ const Cart = (function () {
       "",
     ].join("\n");
 
-    const subject = `Commande Sublimation Boutique (${items.length} item${items.length > 1 ? "s" : ""})`;
+    const subject = `Commande Sublimation Babyfoot Québec (${items.length} item${items.length > 1 ? "s" : ""})`;
     const url = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = url;
   }

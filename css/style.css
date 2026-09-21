@@ -27,6 +27,19 @@ body {
 
 .site-header h1 { margin: 0 0 .3rem; font-size: 2.2rem; }
 .site-header p { margin: 0; opacity: .7; }
+.site-header-cause { margin-top: .4rem !important; opacity: 1 !important; font-weight: 600; color: var(--accent-dark); }
+
+.notice-banner {
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #fff3e6;
+  border: 1px solid #f0c896;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.notice-banner p { margin: .3rem 0; }
 
 .tabs {
   display: flex;
