@@ -56,7 +56,7 @@ const Customize = (function () {
   const BASE_FONT_PCT = 0.09;  // taille de texte "100%" = 9% de la hauteur du canvas
   const MAX_TEXT_WIDTH_PCT = 0.8; // largeur max du texte par rapport au canvas, avant reduction de secours
   const DEFAULT_COLOR = "#14336b";
-  const PERSONALIZATION_SURCHARGE = 3; // supplement quand le client personnalise (texte, tag ou logo)
+  const PERSONALIZATION_SURCHARGE = 0; // supplement quand le client personnalise (texte, tag ou logo)
 
   function init(root) {
     panel = root;
@@ -85,7 +85,7 @@ const Customize = (function () {
     priceDisplay = root.querySelector("#customize-price-display");
 
     const surchargeNote = root.querySelector("#customize-surcharge-note");
-    if (surchargeNote) surchargeNote.textContent = `(+${PERSONALIZATION_SURCHARGE.toFixed(2)} $)`;
+    if (surchargeNote) surchargeNote.textContent = PERSONALIZATION_SURCHARGE > 0 ? `(+${PERSONALIZATION_SURCHARGE.toFixed(2)} $)` : "";
 
     const noneTagBtn = `<button type="button" class="tag-choice tag-choice-none active" data-id="">Aucun tag</button>`;
     tagButtons.innerHTML = noneTagBtn + TAGS.map((t) => `
@@ -256,7 +256,7 @@ const Customize = (function () {
           `Texte - position verticale: ${textYSlider.value}%`,
           `Texte - taille: ${fontSizeSlider.value}%`,
         ] : []),
-        ...(hasCustomization ? [`+${PERSONALIZATION_SURCHARGE.toFixed(2)} $ personnalisation`] : []),
+        ...(hasCustomization && PERSONALIZATION_SURCHARGE > 0 ? [`+${PERSONALIZATION_SURCHARGE.toFixed(2)} $ personnalisation`] : []),
         ...(phoneModel ? [`Modèle de téléphone: ${phoneModel}`] : []),
         ...(magsafeRequested ? ["Option MagSafe demandée (+5 $, à confirmer)"] : []),
       ].join(", ");
@@ -288,7 +288,7 @@ const Customize = (function () {
       priceDisplay.textContent = "Prix sur demande";
       return;
     }
-    priceDisplay.textContent = hasCustomization
+    priceDisplay.textContent = hasCustomization && PERSONALIZATION_SURCHARGE > 0
       ? `Prix : ${price.toFixed(2)} $ (design de base + ${PERSONALIZATION_SURCHARGE.toFixed(2)} $ pour la personnalisation)`
       : `Prix : ${price.toFixed(2)} $`;
   }
