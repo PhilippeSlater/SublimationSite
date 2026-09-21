@@ -694,6 +694,28 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 3rem; }
   font-size: .9rem;
 }
 
+.cart-contact {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  margin: .9rem 0;
+}
+
+.cart-contact label {
+  font-size: .85rem;
+  font-weight: 600;
+  opacity: .8;
+}
+
+.cart-contact input, .cart-contact select {
+  padding: .6rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-bottom: .5rem;
+}
+
 .cart-actions {
   display: flex;
   gap: .6rem;

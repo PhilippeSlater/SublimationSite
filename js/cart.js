@@ -12,11 +12,26 @@
 
 const Cart = (function () {
   const STORAGE_KEY = "sublimation-cart";
+  const CONTACT_KEY = "sublimation-cart-contact";
 
   // TODO: remplace par ta vraie adresse courriel avant de mettre le site en ligne.
   const ORDER_EMAIL = "sublimation.pslater@gmail.com";
 
-  let toggleBtn, panelEl, closeBtn, listEl, countEl, sendBtn, clearBtn;
+  let toggleBtn, panelEl, closeBtn, listEl, countEl, sendBtn, clearBtn, nameInput, langSelect;
+
+  function loadContact() {
+    try {
+      return JSON.parse(localStorage.getItem(CONTACT_KEY)) || { name: "", lang: "Français" };
+    } catch (e) {
+      return { name: "", lang: "Français" };
+    }
+  }
+
+  function saveContact() {
+    try {
+      localStorage.setItem(CONTACT_KEY, JSON.stringify({ name: nameInput.value, lang: langSelect.value }));
+    } catch (e) {}
+  }
 
   function load() {
     try {
@@ -56,6 +71,14 @@ const Cart = (function () {
     countEl = document.getElementById("cart-count");
     sendBtn = document.getElementById("cart-send");
     clearBtn = document.getElementById("cart-clear");
+    nameInput = document.getElementById("cart-name");
+    langSelect = document.getElementById("cart-lang");
+
+    const contact = loadContact();
+    nameInput.value = contact.name;
+    langSelect.value = contact.lang;
+    nameInput.addEventListener("input", saveContact);
+    langSelect.addEventListener("change", saveContact);
 
     toggleBtn.addEventListener("click", () => panelEl.classList.toggle("open"));
     closeBtn.addEventListener("click", () => panelEl.classList.remove("open"));
@@ -93,6 +116,14 @@ const Cart = (function () {
     const items = load();
     if (!items.length) return;
 
+    const name = nameInput.value.trim();
+    if (!name) {
+      alert("Indique ton nom avant d'envoyer ta commande. / Enter your name before sending your order.");
+      nameInput.focus();
+      return;
+    }
+    const lang = langSelect.value;
+
     const ok = confirm(
       "As-tu bien enregistré une image pour chaque item de ta commande " +
       "(bouton \"Enregistrer\") ?\n\n" +
@@ -111,13 +142,16 @@ const Cart = (function () {
     const body = [
       "Bonjour, voici ma commande :",
       "",
+      `Nom : ${name}`,
+      `Langue de communication préférée : ${lang}`,
+      "",
       ...lines,
       "",
       "N'oublie pas de joindre une image par item ci-dessus à ce courriel avant de l'envoyer !",
       "",
     ].join("\n");
 
-    const subject = `Commande Sublimation Babyfoot Québec (${items.length} item${items.length > 1 ? "s" : ""})`;
+    const subject = `Commande Sublimation Babyfoot Québec — ${name} (${items.length} item${items.length > 1 ? "s" : ""})`;
     const url = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = url;
   }
