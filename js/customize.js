@@ -51,6 +51,7 @@ const Customize = (function () {
   let savedForCurrentState = true; // false des qu'un changement rend l'image enregistree obsolete
   let phoneModel = ""; // modele de telephone (etuis), fixe par main.js via setPhoneModel() - informatif seulement
   let magsafeRequested = false; // case "je voudrais MagSafe si possible", fixe par main.js - informatif seulement
+  let mugSize = ""; // grosseur de tasse (11oz/15oz), fixe par main.js via setMugSize() - informatif seulement
 
   const CANVAS_W = 900;
   const BASE_FONT_PCT = 0.09;  // taille de texte "100%" = 9% de la hauteur du canvas
@@ -259,6 +260,7 @@ const Customize = (function () {
         ...(hasCustomization && PERSONALIZATION_SURCHARGE > 0 ? [`+${PERSONALIZATION_SURCHARGE.toFixed(2)} $ personnalisation`] : []),
         ...(phoneModel ? [`Modèle de téléphone: ${phoneModel}`] : []),
         ...(magsafeRequested ? ["Option MagSafe demandée (+5 $, à confirmer)"] : []),
+        ...(mugSize ? [`Grosseur de tasse: ${mugSize}`] : []),
       ].join(", ");
       Cart.addItem({ name: currentProductName, price, details });
     });
@@ -308,6 +310,10 @@ const Customize = (function () {
 
   function setMagsafeRequested(value) {
     magsafeRequested = !!value;
+  }
+
+  function setMugSize(value) {
+    mugSize = value || "";
   }
 
   async function setProduct(product) {
@@ -416,5 +422,5 @@ const Customize = (function () {
     ctx.fillText(text, textX, textY);
   }
 
-  return { init, setProduct, setPhoneModel, setMagsafeRequested };
+  return { init, setProduct, setPhoneModel, setMagsafeRequested, setMugSize };
 })();

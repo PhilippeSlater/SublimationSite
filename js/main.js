@@ -36,6 +36,12 @@ const CATEGORY_NOTICES = {
       <p>⚠️ Nos étuis ne sont <strong>PAS compatibles MagSafe</strong> par défaut — pas de recharge sans fil. Une version MagSafe est possible pour certains modèles de téléphone, pour 25 $ au lieu de 20 $ : indique ton modèle sur le produit, on te confirme par courriel.</p>
       <p class="notice-en">⚠️ Our phone cases are <strong>NOT MagSafe compatible</strong> by default — no wireless charging. A MagSafe version is possible for some phone models, for $25 instead of $20: tell us your model on the product page, we'll confirm by email.</p>
     </div>
+  `,
+  tasse: `
+    <div class="category-notice">
+      <p>Nos tasses sont disponibles en <strong>11oz ou 15oz</strong> au choix — indique la grosseur désirée sur le produit.</p>
+      <p class="notice-en">Our mugs are available in <strong>11oz or 15oz</strong> — pick your preferred size on the product page.</p>
+    </div>
   `
 };
 
@@ -88,18 +94,24 @@ function setupModal() {
   const phoneModelBlock = document.getElementById("phone-model-block");
   const phoneModelInput = document.getElementById("phone-model-input");
   const magsafeRequestToggle = document.getElementById("magsafe-request-toggle");
+  const mugSizeBlock = document.getElementById("mug-size-block");
+  const mugSizeInput = document.getElementById("mug-size-input");
 
   Gallery.init(stage, frameImg, prevBtn, nextBtn, dotsEl, downloadLink);
   Customize.init(customizePanel);
 
   let currentProduct = null;
 
-  function resetPhoneModel(product) {
+  function resetOrderOptions(product) {
     phoneModelInput.value = "";
     magsafeRequestToggle.checked = false;
     phoneModelBlock.hidden = product.category !== "etui";
     Customize.setPhoneModel("");
     Customize.setMagsafeRequested(false);
+
+    mugSizeInput.value = "15oz";
+    mugSizeBlock.hidden = product.category !== "tasse";
+    Customize.setMugSize(product.category === "tasse" ? mugSizeInput.value : "");
   }
 
   function openRegularProduct(product) {
@@ -109,7 +121,7 @@ function setupModal() {
     modalHint.hidden = false;
     downloadLink.hidden = false;
     addCartBtn.hidden = false;
-    resetPhoneModel(product);
+    resetOrderOptions(product);
     Gallery.show(product);
     Customize.setProduct(product);
   }
@@ -123,7 +135,7 @@ function setupModal() {
     customizePanel.hidden = true;
     customFileInput.value = "";
     customUpload.hidden = false;
-    resetPhoneModel(product);
+    resetOrderOptions(product);
 
     const backgrounds = (BACKGROUNDS && BACKGROUNDS[product.category]) || [];
     customBackgroundsBlock.hidden = backgrounds.length === 0;
@@ -175,12 +187,17 @@ function setupModal() {
     Customize.setMagsafeRequested(magsafeRequestToggle.checked);
   });
 
+  mugSizeInput.addEventListener("change", () => {
+    Customize.setMugSize(mugSizeInput.value);
+  });
+
   addCartBtn.addEventListener("click", () => {
     if (!currentProduct) return;
     const phoneModel = phoneModelInput.value.trim();
     const details = [
       ...(phoneModel ? [`Modèle de téléphone: ${phoneModel}`] : []),
       ...(magsafeRequestToggle.checked ? ["Option MagSafe demandée (+5 $, à confirmer)"] : []),
+      ...(!mugSizeBlock.hidden ? [`Grosseur de tasse: ${mugSizeInput.value}`] : []),
     ].join(", ") || null;
     Cart.addItem({ name: currentProduct.name, price: currentProduct.price, details });
   });
