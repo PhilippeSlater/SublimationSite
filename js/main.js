@@ -10,7 +10,7 @@ function productCardHtml(p) {
       <img src="${p.photos[0]}" alt="${p.name}" loading="lazy">
       <div class="info">
         <h3>${p.name}</h3>
-        <div class="price">${p.price != null ? p.price.toFixed(2) + " $" : "Prix sur demande"}</div>
+        <div class="price">${p.price != null ? p.price.toFixed(2) + " $" : "Prix sur demande / Price on request"}</div>
         <button class="view-360" data-id="${p.id}">Voir les photos</button>
       </div>
     </div>
@@ -23,7 +23,7 @@ function customCardHtml(p) {
       <div class="custom-card-visual">📤<br>Ton design</div>
       <div class="info">
         <h3>${p.name}</h3>
-        <div class="price">à partir de ${p.price.toFixed(2)} $</div>
+        <div class="price">à partir de ${p.price.toFixed(2)} $ / from $${p.price.toFixed(2)}</div>
         <button class="view-360" data-id="${p.id}">Personnaliser</button>
       </div>
     </div>
@@ -47,7 +47,7 @@ function renderSections() {
     const notice = CATEGORY_NOTICES[cat] || "";
 
     if (items.length === 0 && !customItem) {
-      section.innerHTML = notice + `<p class="empty-msg">Aucun modèle de ${CATEGORY_LABELS[cat]} pour l'instant. Reviens bientôt !</p>`;
+      section.innerHTML = notice + `<p class="empty-msg">Aucun modèle de ${CATEGORY_LABELS[cat]} pour l'instant. Reviens bientôt ! / No ${CATEGORY_LABELS[cat]} design yet. Check back soon!</p>`;
       return;
     }
 

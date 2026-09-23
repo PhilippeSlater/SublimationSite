@@ -285,7 +285,7 @@ const Customize = (function () {
   function updatePriceDisplay() {
     const { price, hasCustomization } = computePrice();
     if (price == null) {
-      priceDisplay.textContent = "Prix sur demande";
+      priceDisplay.textContent = "Prix sur demande / Price on request";
       return;
     }
     priceDisplay.textContent = hasCustomization && PERSONALIZATION_SURCHARGE > 0
