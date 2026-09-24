@@ -457,7 +457,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 3rem; }
 }
 
 .customize-preview {
-  order: -1;
+  order: 1;
   background: var(--card-bg);
   padding-bottom: .8rem;
   border-bottom: 1px solid var(--border);
@@ -472,7 +472,8 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 3rem; }
 }
 
 @media (min-width: 680px) {
-  .modal-content:has(#customize-fields:not([hidden])) {
+  .modal-content:has(#customize-fields:not([hidden])),
+  .modal-content:has(.customize-preview:not([hidden])) {
     width: min(96vw, 1040px);
   }
 

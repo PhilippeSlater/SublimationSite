@@ -37,8 +37,9 @@ const Customize = (function () {
   let panel, toggle, fields, textInput, tagButtons, logoButtons, fontButtons;
   let colorInput, tagYSlider, tagWSlider, tagHSlider, tagLockCheckbox;
   let logoYSlider, logoWSlider, logoHSlider, logoLockCheckbox;
-  let textYSlider, fontSizeSlider, canvas, ctx, downloadBtn, addCartBtn, addCartHint, priceDisplay;
+  let textYSlider, fontSizeSlider, canvas, ctx, downloadBtn, addCartBtn, addCartHint, priceDisplay, previewBlock;
   let wrapImg = null;
+  let isCustomProduct = false; // true = flux "Creez votre..." (upload/background) : pas d'autre photo du design, donc le preview s'affiche tout de suite
   let currentTag = null;   // null = "Aucun tag"
   let currentLogo = null;  // null = "Aucun logo"
   let currentFont = FONTS[0];
@@ -84,6 +85,7 @@ const Customize = (function () {
     addCartBtn = root.querySelector("#customize-add-cart");
     addCartHint = root.querySelector("#customize-add-cart-hint");
     priceDisplay = root.querySelector("#customize-price-display");
+    previewBlock = root.querySelector(".customize-preview");
 
     const surchargeNote = root.querySelector("#customize-surcharge-note");
     if (surchargeNote) surchargeNote.textContent = PERSONALIZATION_SURCHARGE > 0 ? `(+${PERSONALIZATION_SURCHARGE.toFixed(2)} $)` : "";
@@ -111,6 +113,11 @@ const Customize = (function () {
 
     toggle.addEventListener("change", () => {
       fields.hidden = !toggle.checked;
+      // Pour un produit regulier, le wrap est deja visible dans la galerie de
+      // photos : on n'affiche le preview qu'une fois la personnalisation
+      // activee. Pour un produit "Creez votre..." (upload/background), il
+      // n'y a pas d'autre apercu du design : le preview reste toujours visible.
+      if (!isCustomProduct) previewBlock.hidden = !toggle.checked;
       if (toggle.checked) render();
     });
 
@@ -326,12 +333,14 @@ const Customize = (function () {
     currentTag = null;
     currentLogo = null;
     currentFont = FONTS[0];
+    isCustomProduct = !!product.isCustom;
     tagButtons.querySelectorAll(".tag-choice").forEach((b) => b.classList.toggle("active", !b.dataset.id));
     logoButtons.querySelectorAll(".logo-choice").forEach((b) => b.classList.toggle("active", !b.dataset.id));
     fontButtons.querySelectorAll(".font-choice").forEach((b, i) => b.classList.toggle("active", i === 0));
 
     toggle.checked = false;
     fields.hidden = true;
+    previewBlock.hidden = !isCustomProduct;
     textInput.value = "";
     colorInput.value = DEFAULT_COLOR;
     tagYSlider.value = 50;
