@@ -353,6 +353,8 @@ const Customize = (function () {
       loadedWrapUrl = product.wrap;
       canvasH = Math.round((wrapImg.height / wrapImg.width) * CANVAS_W) || 900;
     }
+
+    render();
   }
 
   async function render() {

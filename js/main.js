@@ -120,7 +120,10 @@ function setupModal() {
     dotsEl.hidden = false;
     modalHint.hidden = false;
     downloadLink.hidden = false;
-    addCartBtn.hidden = false;
+    // Les produits avec wrap ont leur propre bouton "Ajouter a ma commande"
+    // dans le panneau de personnalisation (a la fin des options) : on evite
+    // d'avoir deux boutons qui font la meme chose a deux endroits.
+    addCartBtn.hidden = !!product.wrap;
     resetOrderOptions(product);
     Gallery.show(product);
     Customize.setProduct(product);
